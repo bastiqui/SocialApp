@@ -17,6 +17,7 @@ import com.example.gerard.socialapp.model.Post;
 import com.example.gerard.socialapp.view.PostViewHolder;
 import com.example.gerard.socialapp.view.activity.NewPostActivity;
 import com.example.gerard.socialapp.view.activity.ShowImageActivity;
+import com.example.gerard.socialapp.view.activity.ViewAuthorPosts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,6 +82,15 @@ public class PostsFragment extends Fragment {
                 final String postKey = getRef(position).getKey();
 
                 viewHolder.author.setText(post.author);
+
+                viewHolder.author.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent authorPosts = new Intent(getContext(), ViewAuthorPosts.class);
+                        authorPosts.putExtra("id", post.uid);
+                        startActivity(authorPosts);
+                    }
+                });
 
                 GlideApp.with(PostsFragment.this).load(post.authorPhotoUrl).circleCrop().into(viewHolder.photo);
 

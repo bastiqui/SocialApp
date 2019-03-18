@@ -42,9 +42,8 @@ public class ViewAuthorPosts extends Fragment {
         Intent intent = getActivity().getIntent();
         String key = intent.getStringExtra("id");
 
-
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Post>()
-                .setIndexedQuery(setQuery(key), mReference.child("posts/data").child(key), Post.class)
+                .setIndexedQuery(setQuery(key), mReference.child("posts/user-posts").child(key), Post.class)
                 .setLifecycleOwner(this)
                 .build();
 
@@ -144,6 +143,6 @@ public class ViewAuthorPosts extends Fragment {
     }
 
     Query setQuery(String key){
-        return mReference.child("posts/data").child(key);
+        return mReference.child("posts/user-posts").child(key);
     }
 }
